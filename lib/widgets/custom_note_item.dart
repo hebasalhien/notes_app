@@ -13,7 +13,6 @@ class CustomNoteItem extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
-
         children: [
           ListTile(
             title: Text('Flutter Tips', style: TextStyle(fontSize: 36)),
