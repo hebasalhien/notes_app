@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:notes_app/views/edit_note_view.dart';
+import 'package:notes_app/widgets/custom_dialog.dart';
 
 class CustomNoteItem extends StatelessWidget {
   const CustomNoteItem({super.key});
@@ -35,7 +36,11 @@ class CustomNoteItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed:()=> showDialog<String>(
+            context: context,
+            builder:
+                (BuildContext context) => CustomDialog(),
+          ),
                 icon: Icon(FontAwesomeIcons.trash, size: 30),
               ),
 

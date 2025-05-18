@@ -15,7 +15,7 @@ class AddNoteBottomSheet extends StatelessWidget {
           children: [
             CustomTextField(title: 'Title'),
             CustomTextField(title: 'Content', maxLines: 5),
-            CustomButton(),
+            CustomButton(width: MediaQuery.of(context).size.width,action: 'Add',onTap: (){},),
           ],
         ),
       ),
