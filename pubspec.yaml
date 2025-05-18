@@ -7,6 +7,7 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  bloc: ^9.0.0
   flutter:
     sdk: flutter
   font_awesome_flutter: ^10.8.0
@@ -14,11 +15,11 @@ dependencies:
   hive_flutter: ^1.1.0
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
-  hive_generator: ^2.0.1
   build_runner: ^2.4.15
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
+  hive_generator: ^2.0.1
 
 flutter:
   uses-material-design: true
