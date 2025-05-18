@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:notes_app/constants.dart';
 
@@ -12,7 +11,11 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       decoration: InputDecoration(
         hintText: title,
-        hintStyle: TextStyle(fontFamily: 'Poppins', color: kPrimaryColor),
+        hintStyle: TextStyle(
+          fontFamily: 'Poppins',
+          color: kPrimaryColor,
+          fontSize: 24,
+        ),
         enabledBorder: buildBorder(color: Colors.white),
         focusedBorder: buildBorder(color: kPrimaryColor),
       ),
