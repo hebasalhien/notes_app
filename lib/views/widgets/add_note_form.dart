@@ -19,45 +19,57 @@ class _AddNoteFormState extends State<AddNoteForm> {
   String? title, content;
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      autovalidateMode: autovalidateMode,
-      child: Column(
-        spacing: 60,
-        children: [
-          CustomTextField(
-            title: 'Title',
-            onSaved: (value) {
-              title = value;
-            },
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+      child: SingleChildScrollView(
+        child: Form(
+          key: formKey,
+          autovalidateMode: autovalidateMode,
+          child: Column(
+            spacing: 60,
+            children: [
+              CustomTextField(
+                title: 'Title',
+                onSaved: (value) {
+                  title = value;
+                },
+              ),
+              CustomTextField(
+                title: 'Content',
+                maxLines: 5,
+                onSaved: (value) {
+                  content = value;
+                },
+              ),
+              BlocBuilder<AddNotesCubit, AddNotesState>(
+                builder: (context, state) {
+                  return CustomButton(
+                    isLoading: state is AddNoteLoading ? true : false,
+                    width: MediaQuery.of(context).size.width,
+                    action: 'Add',
+                    onTap: () {
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        var noteModel = NotesModel(
+                          color: Colors.blue.value,
+                          title: title!,
+                          content: content!,
+                          date: DateTime.now().toString(),
+                        );
+                        BlocProvider.of<AddNotesCubit>(
+                          context,
+                        ).addNote(noteModel);
+                      } else {
+                        autovalidateMode = AutovalidateMode.always;
+                        setState(() {});
+                      }
+                    },
+                  );
+                },
+              ),
+            ],
           ),
-          CustomTextField(
-            title: 'Content',
-            maxLines: 5,
-            onSaved: (value) {
-              content = value;
-            },
-          ),
-          CustomButton(
-            width: MediaQuery.of(context).size.width,
-            action: 'Add',
-            onTap: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-                var noteModel = NotesModel(
-                  color: Colors.blue.value,
-                  title: title!,
-                  content: content!,
-                  date: DateTime.now().toString(),
-                );
-                BlocProvider.of<AddNotesCubit>(context).addNote(noteModel);
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
-            },
-          ),
-        ],
+        ),
       ),
     );
   }
