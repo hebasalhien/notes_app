@@ -22,6 +22,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
       child: SingleChildScrollView(
+        padding: MediaQuery.of(context).viewInsets,
         child: Form(
           key: formKey,
           autovalidateMode: autovalidateMode,
