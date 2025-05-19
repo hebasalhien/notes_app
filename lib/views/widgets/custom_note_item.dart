@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
+import 'package:notes_app/cubits/notes_cubit/notes_cubit.dart';
 import 'package:notes_app/models/notes_model.dart';
 import 'package:notes_app/views/edit_note_view.dart';
 import 'package:notes_app/views/widgets/custom_dialog.dart';
@@ -14,7 +15,7 @@ class CustomNoteItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const EditNoteView()),
+          MaterialPageRoute(builder: (context) =>  EditNoteView(note:notesModel,)),
         );
       },
       child: Container(
@@ -39,11 +40,21 @@ class CustomNoteItem extends StatelessWidget {
                 ),
               ),
               trailing: IconButton(
-                onPressed:
-                    () => showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => CustomDialog(),
-                    ),
+                onPressed: () {
+                  final notesCubit = BlocProvider.of<NotesCubit>(context);
+                  showDialog<String>(
+                    context: context,
+                    builder:
+                        (BuildContext dialogcontext) => CustomDialog(
+                          onTap: () {
+                            
+                            notesModel.delete();
+                            Navigator.pop(dialogcontext);
+                            notesCubit.getAllNotes();
+                          },
+                        ),
+                  );
+                },
                 icon: Icon(FontAwesomeIcons.trash, size: 30),
               ),
 

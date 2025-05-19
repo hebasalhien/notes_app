@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/views/widgets/custom_button.dart';
 
 class CustomDialog extends StatelessWidget {
-  const CustomDialog({super.key});
-
+  const CustomDialog({super.key, required this.onTap});
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -20,7 +20,7 @@ class CustomDialog extends StatelessWidget {
         ),
       ),
       actions: [
-        CustomButton(width: 120, action: 'Delete', onTap: () {}),
+        CustomButton(width: 120, action: 'Delete', onTap: onTap),
         SizedBox(width: 20),
         CustomButton(
           width: 120,
